@@ -6,19 +6,17 @@ router.get('', function(req, res) {
   Product.find({}, function(err, foundProducts) {
     return res.json(foundProducts)
 
-
-
   })
 })
 
 router.get('/:productId', function(req, res) {
   const productId = req.params.productId
-  Product.findById(productId, function(err, foundProducts) {
+  Product.findById(productId, function(err, foundProduct) {
     if(err) {
       return res.status(422).send({errors: [{title: 'product error', detail: `product not found`}]})
     }
 
-    return res.json(foundProducts)
+    return res.json(foundProduct)
 
   })
 })
