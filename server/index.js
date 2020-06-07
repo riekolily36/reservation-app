@@ -11,7 +11,7 @@ mongoose.connect(config.DB_URI, {
   useUnifiedTopology: true
 }).then(
   () => {
-    if(process.env.MODE_ENV !== `production`) {
+    if(process.env.NODE_ENV !== `production`) {
       const sampleDb = new SampleDb()
 //      sampleDb.initDb()
     }
@@ -22,7 +22,7 @@ const app = express()
 
 app.use(`/api/v1/products`, productRoutes)
 
-if(process.env.MODE_ENV === `production`) {
+if(process.env.NODE_ENV === `production`) {
   const appPath = path.join( __dirname, `..`, `dist`, 'reservation-app')
   app.use(express.static(appPath))
   app.get("*", function(req, res) {
